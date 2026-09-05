@@ -27,6 +27,32 @@ def load_canonical(ref: str) -> dict:
     return json.loads(Path(ref).read_text(encoding="utf-8"))
 
 
+def vendor(hub: dict, rid: str, canonical: dict, *, status: str | None = None, source: str | None = None,
+           platform: str | None = None, title: str | None = None, question_page: str | None = None) -> dict:
+    """Replace (or append) the entry `rid` in `hub` with the canonical file's content under the hub keys.
+
+    Returns the new entry. Raises ValueError when a new id lacks title, platform, status or question_page.
+    """
+    entries = hub["recipes"]
+    old = next((r for r in entries if r.get("id") == rid), None)
+    new: dict = {k: old[k] for k in HUB_KEYS if old and k in old} if old else {"id": rid}
+    for key, value in (("title", title), ("platform", platform), ("status", status),
+                       ("question_page", question_page), ("source", source)):
+        if value:
+            new[key] = value
+    # Hub keys first, then the canonical file verbatim (it never carries hub keys).
+    ordered = {k: new[k] for k in HUB_KEYS if k in new}
+    ordered.update(canonical)
+    if old:
+        hub["recipes"] = [ordered if r.get("id") == rid else r for r in entries]
+    else:
+        missing = [k for k in ("title", "platform", "status", "question_page") if k not in ordered]
+        if missing:
+            raise ValueError(f"new id {rid}: missing {', '.join(missing)}")
+        entries.append(ordered)
+    return ordered
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("id")
@@ -42,36 +68,19 @@ def main(argv: list[str] | None = None) -> int:
     hub_path = args.root / "recipes.json"
     hub = json.loads(hub_path.read_text(encoding="utf-8"))
     canonical = load_canonical(args.canonical)
-    entries = hub["recipes"]
-    old = next((r for r in entries if r.get("id") == args.id), None)
-
-    new: dict = {k: old[k] for k in HUB_KEYS if old and k in old} if old else {"id": args.id}
-    if args.title:
-        new["title"] = args.title
-    if args.platform:
-        new["platform"] = args.platform
-    if args.status:
-        new["status"] = args.status
-    if args.question_page:
-        new["question_page"] = args.question_page
-    if args.source:
-        new["source"] = args.source
-    elif args.canonical.startswith("http") and "source" not in new:
-        new["source"] = args.canonical
-    # Hub keys first, then the canonical file verbatim (it never carries hub keys).
-    ordered = {k: new[k] for k in HUB_KEYS if k in new}
-    ordered.update(canonical)
-
-    if old:
-        hub["recipes"] = [ordered if r.get("id") == args.id else r for r in entries]
-    else:
-        missing = [k for k in ("title", "platform", "status", "question_page") if k not in ordered]
-        if missing:
-            parser.error(f"new id {args.id}: missing {', '.join(missing)}")
-        entries.append(ordered)
+    source = args.source
+    if not source and args.canonical.startswith("http"):
+        old = next((r for r in hub["recipes"] if r.get("id") == args.id), None)
+        if not (old and "source" in old):
+            source = args.canonical
+    try:
+        entry = vendor(hub, args.id, canonical, status=args.status, source=source, platform=args.platform,
+                       title=args.title, question_page=args.question_page)
+    except ValueError as err:
+        parser.error(str(err))
     hub_path.write_text(json.dumps(hub, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"vendored {args.id} from {args.canonical} (status={ordered.get('status')}, source={ordered.get('source', '-')})")
-    print("next: python tools/validate.py && python tools/check_drift.py")
+    print(f"vendored {args.id} from {args.canonical} (status={entry.get('status')}, source={entry.get('source', '-')})")
+    print("next: python tools/validate.py && python tools/check_drift.py && python tools/render.py")
     return 0
 
 

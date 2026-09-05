@@ -20,3 +20,5 @@ jobs:
         run: python tools/validate.py --recipe android-llm-chat/recipe.json
       - name: vendored recipes against their canonical recipe.json
         run: python tools/check_drift.py
+      - name: generated regions against recipes.json and the cached listing
+        run: python tools/render.py --check

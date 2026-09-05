@@ -1,0 +1,1202 @@
+{
+ "source": "https://huggingface.co/api/models?author=litert-community&limit=400&expand[]=cardData&expand[]=gated&expand[]=lastModified&expand[]=siblings&expand[]=pipeline_tag&expand[]=tags&expand[]=library_name",
+ "fetched": "2026-09-05",
+ "note": "Every litert-community repository that carries a .litertlm file, with gated, license, base_model, pipeline_tag and lastModified as the API returned them. Refresh: python tools/render.py --fetch.",
+ "repositories_listed": 344,
+ "repos": [
+  {
+   "id": "litert-community/codegemma-7b-it-int4-litertlm",
+   "gated": false,
+   "license": "gemma",
+   "license_name": null,
+   "base_model": "google/codegemma-7b-it",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-08-16",
+   "files": [
+    "codegemma-7b-it-int4-litertlm.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/DeepSeek-R1-Distill-Qwen-1.5B",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2025-09-22",
+   "files": [
+    "DeepSeek-R1-Distill-Qwen-1.5B_multi-prefill-seq_q8_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/DeepSeek-R1-Distill-Qwen-7B",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "DeepSeek-R1-Distill-Qwen-7B_q4_block32_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Falcon-H1-0.5B-Instruct",
+   "gated": false,
+   "license": "other",
+   "license_name": "falcon-llm-license",
+   "base_model": "tiiuae/Falcon-H1-0.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Falcon-H1-0.5B-Instruct_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Falcon-H1-1.5B-Deep-Instruct",
+   "gated": false,
+   "license": "other",
+   "license_name": "falcon-llm-license",
+   "base_model": "tiiuae/Falcon-H1-1.5B-Deep-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Falcon-H1-1.5B-Deep-Instruct_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Falcon-H1-1.5B-Instruct",
+   "gated": false,
+   "license": "other",
+   "license_name": "falcon-llm-license",
+   "base_model": "tiiuae/Falcon-H1-1.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Falcon-H1-1.5B-Instruct_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Falcon-H1-3B-Instruct",
+   "gated": false,
+   "license": "other",
+   "license_name": "falcon-llm-license",
+   "base_model": "tiiuae/Falcon-H1-3B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Falcon-H1-3B-Instruct_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Falcon-H1-Tiny-R-0.6B",
+   "gated": false,
+   "license": "other",
+   "license_name": "falcon-llm-license",
+   "base_model": "tiiuae/Falcon-H1-Tiny-R-0.6B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Falcon-H1-Tiny-R-0.6B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/FastContext-1.0-4B-SFT",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "microsoft/FastContext-1.0-4B-SFT",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm",
+    "model_block128.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/FastVLM-0.5B",
+   "gated": false,
+   "license": "apple-amlr",
+   "license_name": null,
+   "base_model": "apple/FastVLM-0.5B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-24",
+   "files": [
+    "FastVLM-0.5B.litertlm",
+    "FastVLM-0.5B.qualcomm.sm8750.litertlm",
+    "FastVLM-0.5B.qualcomm.sm8850.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/functiongemma-270m-ft-mobile-actions",
+   "gated": "auto",
+   "license": "gemma",
+   "license_name": null,
+   "base_model": "google/functiongemma-270m-it",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-08-31",
+   "files": [
+    "functiongemma-270m-ft-mobile-actions_Google_Tensor_G5.litertlm",
+    "functiongemma-270m-ft-mobile-actions_Google_Tensor_G6.litertlm",
+    "mobile_actions_q8_ekv1024.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/functiongemma-270m-ft-tiny-garden",
+   "gated": "auto",
+   "license": "gemma",
+   "license_name": null,
+   "base_model": "google/functiongemma-270m-it",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-02-26",
+   "files": [
+    "tiny_garden_q8_ekv1024.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/functiongemma-mobile-actions_q8_ekv1024.litertlm",
+   "gated": false,
+   "license": "gemma",
+   "license_name": null,
+   "base_model": "google/functiongemma-270m-it",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-07-24",
+   "files": [
+    "mobile-actions_q8_ekv1024.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/gemma-3-270m-it",
+   "gated": "auto",
+   "license": "gemma",
+   "license_name": null,
+   "base_model": "google/gemma-3-270m-it",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-04-08",
+   "files": [
+    "gemma3-270m-it-q8.litertlm",
+    "gemma3-270m-it-q8.mediatek.mt6991.litertlm",
+    "gemma3-270m-it-q8.mediatek.mt6993.litertlm",
+    "gemma3-270m-it-q8.qualcomm.sm8550.litertlm",
+    "gemma3-270m-it-q8.qualcomm.sm8650.litertlm",
+    "gemma3-270m-it-q8.qualcomm.sm8750.litertlm",
+    "gemma3-270m-it-q8.qualcomm.sm8850.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/gemma-4-12B-it-litert-lm",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "google/gemma-4-12B-it",
+   "pipeline_tag": null,
+   "last_modified": "2026-09-04",
+   "files": [
+    "gemma-4-12B-it-gpu.litertlm",
+    "gemma-4-12B-it-web.litertlm",
+    "gemma-4-12B-it.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/gemma-4-26B-A4B-it-litert-lm",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "google/gemma-4-26B-A4B-it",
+   "pipeline_tag": null,
+   "last_modified": "2026-08-07",
+   "files": [
+    "gemma-4-26B-A4B-it-gpu.litertlm",
+    "gemma-4-26B-A4B-it-web.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/gemma-4-31B-it-litert-lm",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "google/gemma-4-31B-it",
+   "pipeline_tag": null,
+   "last_modified": "2026-08-07",
+   "files": [
+    "gemma-4-31B-it-gpu.litertlm",
+    "gemma-4-31B-it-web.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/gemma-4-E2B-it-litert-lm",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "google/gemma-4-E2B-it",
+   "pipeline_tag": null,
+   "last_modified": "2026-08-31",
+   "files": [
+    "gemma-4-E2B-it-gpu.litertlm",
+    "gemma-4-E2B-it-web.litertlm",
+    "gemma-4-E2B-it.litertlm",
+    "gemma-4-E2B-it_Google_Tensor_G5.litertlm",
+    "gemma-4-E2B-it_Google_Tensor_G6.litertlm",
+    "gemma-4-E2B-it_intel_LNL.litertlm",
+    "gemma-4-E2B-it_intel_PTL.litertlm",
+    "gemma-4-E2B-it_qualcomm_qcs8275.litertlm",
+    "gemma-4-E2B-it_qualcomm_sm8750.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/gemma-4-E4B-it-litert-lm",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "google/gemma-4-E4B-it",
+   "pipeline_tag": null,
+   "last_modified": "2026-08-07",
+   "files": [
+    "gemma-4-E4B-it-gpu.litertlm",
+    "gemma-4-E4B-it-web.litertlm",
+    "gemma-4-E4B-it.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Gemma3-1B-IT",
+   "gated": "auto",
+   "license": "gemma",
+   "license_name": null,
+   "base_model": "google/Gemma-3-1B-IT",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-01",
+   "files": [
+    "Gemma3-1B-IT_multi-prefill-seq_q4_ekv4096.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_mt6989.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_mt6991.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_mt6993.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_sm8550.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_sm8650.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_sm8750.litertlm",
+    "Gemma3-1B-IT_q4_ekv1280_sm8850.litertlm",
+    "Gemma3-1B-IT_q8_ekv1280_Google_Tensor_G5.litertlm",
+    "Gemma3-1B-IT_q8_ekv1280_Google_Tensor_G6.litertlm",
+    "gemma3-1b-it-int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/granite-4.0-350m-litert-lm",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "ibm-granite/granite-4.0-350m",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-07-15",
+   "files": [
+    "granite-4.0-350m_q8_ekv1280.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/granite-4.0-h-1b",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "ibm-granite/granite-4.0-h-1b",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "granite-4.0-h-1b_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/granite-4.0-h-350m",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "ibm-granite/granite-4.0-h-350m",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "granite-4.0-h-350m_fp16.litertlm",
+    "granite-4.0-h-350m_int8.litertlm",
+    "granite-4.0-h-350m_int8_gpu.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/granite-4.1-3b",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "ibm-granite/granite-4.1-3b",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "granite-4.1-3b_int4.litertlm",
+    "granite-4.1-3b_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/granite-4.2-3b",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "ibm-granite/granite-4.2-3b",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "granite-4.2-3b_int4.litertlm",
+    "granite-4.2-3b_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/granite-docling-258M",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "ibm-granite/granite-docling-258M",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "granite-docling-258M.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Hy-MT2-1.8B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "tencent/Hy-MT2-1.8B",
+   "pipeline_tag": "translation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Hy-MT2-1.8B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/InternVL3-1B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "OpenGVLab/InternVL3-1B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "InternVL3-1B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/InternVL3-2B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "OpenGVLab/InternVL3-2B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "InternVL3-2B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/InternVL3_5-1B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "OpenGVLab/InternVL3_5-1B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/InternVL3_5-2B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "OpenGVLab/InternVL3_5-2B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/InternVL3_5-4B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "OpenGVLab/InternVL3_5-4B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Jan-nano",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Menlo/Jan-nano",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm",
+    "model_block32.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-1.2B-Instruct",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-1.2B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LFM2.5-1.2B-Instruct_int4.litertlm",
+    "LFM2.5-1.2B-Instruct_int4_gpu.litertlm",
+    "LFM2.5-1.2B-Instruct_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-1.2B-JP",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-1.2B-JP",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LFM2.5-1.2B-JP_int4.litertlm",
+    "LFM2.5-1.2B-JP_int4_gpu.litertlm",
+    "LFM2.5-1.2B-JP_int8.litertlm",
+    "LFM2.5-1.2B-JP_int8_gpu.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-1.2B-Thinking",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-1.2B-Thinking",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LFM2.5-1.2B-Thinking_int4.litertlm",
+    "LFM2.5-1.2B-Thinking_int4_gpu.litertlm",
+    "LFM2.5-1.2B-Thinking_int8.litertlm",
+    "LFM2.5-1.2B-Thinking_int8_gpu.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-2.6B",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-2.6B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "LFM2.5-2.6B_int4.litertlm",
+    "LFM2.5-2.6B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-230M",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm1.0",
+   "base_model": "LiquidAI/LFM2.5-230M",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LFM2.5-230M_int4.litertlm",
+    "LFM2.5-230M_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-VL-1.6B",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-VL-1.6B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LFM2.5-VL-1.6B_int4.litertlm",
+    "LFM2.5-VL-1.6B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-VL-3B",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-VL-3B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "LFM2.5-VL-3B_int4.litertlm",
+    "LFM2.5-VL-3B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LFM2.5-VL-450M",
+   "gated": false,
+   "license": "other",
+   "license_name": "lfm-open-license-v1.0",
+   "base_model": "LiquidAI/LFM2.5-VL-450M",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LFM2.5-VL-450M_int4.litertlm",
+    "LFM2.5-VL-450M_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Llama-3.2-1B",
+   "gated": "auto",
+   "license": "llama3.2",
+   "license_name": null,
+   "base_model": "meta-llama/Llama-3.2-1B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-30",
+   "files": [
+    "llama3_2_1b_mixed_int4_gpu.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Llama-3.2-3B",
+   "gated": "auto",
+   "license": "llama3.2",
+   "license_name": null,
+   "base_model": "meta-llama/Llama-3.2-3B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-30",
+   "files": [
+    "llama3_2_3b_mixed_int4_gpu.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/LLaVA-OneVision-0.5B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "llava-hf/llava-onevision-qwen2-0.5b-ov-hf",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "LLaVA-OneVision-0.5B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Mage-VL",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "microsoft/Mage-VL",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Mage-VL.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/MedGemma-1.5-4B-IT",
+   "gated": "auto",
+   "license": "other",
+   "license_name": "health-ai-developer-foundations",
+   "base_model": "google/medgemma-1.5-4b-it",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-08-28",
+   "files": [
+    "medgemma-1.5-4b-it_q4_block32_ekv2048.litertlm",
+    "medgemma-1.5-4b-it_q4_block32_vision_ekv2048.litertlm",
+    "medgemma-1.5-4b-it_q8_gpu_ekv2048.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/MiniCPM-V-4",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "openbmb/MiniCPM-V-4",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-08-01",
+   "files": [
+    "MiniCPM-V-4-int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/MiniCPM5-1B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "openbmb/MiniCPM5-1B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-08-14",
+   "files": [
+    "MiniCPM5-1B_dynamic_wi8_afp32.litertlm",
+    "minicpm_wi4b32_wi8_afp32.litertlm",
+    "minicpm_wi4b32_wi8_afp32_gpu_opt.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Ministral-3-3B-Instruct-2512",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "mistralai/Ministral-3-3B-Instruct-2512",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Ministral-3-3B-Instruct-2512_q4_block32_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Ministral-3-3B-Reasoning-2512",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "mistralai/Ministral-3-3B-Reasoning-2512",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Nanbeige4.1-3B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Nanbeige/Nanbeige4.1-3B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Nanbeige4.2-3B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Nanbeige/Nanbeige4.2-3B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm",
+    "model_fp32act.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Nemotron-3-Nano-4B",
+   "gated": false,
+   "license": "other",
+   "license_name": "nvidia-nemotron-open-model-license",
+   "base_model": "nvidia/NVIDIA-Nemotron-3-Nano-4B-BF16",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Nemotron-3-Nano-4B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Nemotron-H-4B-Instruct-128K",
+   "gated": false,
+   "license": "other",
+   "license_name": "nvidia-open-model-license",
+   "base_model": "nvidia/Nemotron-H-4B-Instruct-128K",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Nemotron-H-4B-Instruct-128K_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/North-Micro-Vision-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "CohereLabs/North-Micro-Vision-Instruct",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "North-Micro-Vision-Instruct_int4.litertlm",
+    "North-Micro-Vision-Instruct_wi8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/OLMo-2-1B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "allenai/OLMo-2-0425-1B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "OLMo-2-1B-Instruct_q4_block32_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Ovis2.5-2B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "AIDC-AI/Ovis2.5-2B",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Ovis2.5-2B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/PaddleOCR-VL-1.6",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "PaddlePaddle/PaddleOCR-VL-1.6",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "PaddleOCR-VL-1.6.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Phi-4-mini-instruct",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "microsoft/Phi-4-mini-instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2025-09-22",
+   "files": [
+    "Phi-4-mini-instruct_multi-prefill-seq_q8_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Phi-4-mini-reasoning",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "microsoft/Phi-4-mini-reasoning",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Polaris-4B-Preview",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "POLARIS-Project/Polaris-4B-Preview",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen2-0.5B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen2-0.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-01",
+   "files": [
+    "Qwen2_0.5B_Instruct.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen2-1.5B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen2-1.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-26",
+   "files": [
+    "Qwen2_1.5B_Instruct.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen2-VL-2B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen2-VL-2B-Instruct",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Qwen2-VL-2B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen2.5-1.5B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2025-11-25",
+   "files": [
+    "Qwen2.5-1.5B-Instruct_multi-prefill-seq_f32_ekv4096.litertlm",
+    "Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen2.5-Coder-1.5B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Qwen2.5-Coder-1.5B-Instruct_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen2.5-Coder-3B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen2.5-Coder-3B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-01",
+   "files": [
+    "Qwen2.5_Coder_3B_It.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-0.6B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-0.6B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-08-05",
+   "files": [
+    "Qwen3-0.6B.litertlm",
+    "Qwen3-0.6B.mediatek.mt6993.litertlm",
+    "Qwen3-0.6B_dynamic_wi4b32_afp32.litertlm",
+    "qwen3_0_6b_mixed_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-0.6B-int4",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-0.6B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-30",
+   "files": [
+    "qwen3_0.6b_nothink_q4_block32_ekv1280.litertlm",
+    "qwen3_0.6b_q4_block32_ekv1280.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-1.7B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-1.7B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-08-31",
+   "files": [
+    "Qwen3-1.7B_dynamic_wi4b32_afp32.litertlm",
+    "Qwen3_1.7B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-14B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-14B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-05",
+   "files": [
+    "qwen3_14b_channelwise_int8_float32kv.litertlm",
+    "qwen3_14b_mixed_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-4B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-4B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-05",
+   "files": [
+    "qwen3_4b_channelwise_int8_float32kv.litertlm",
+    "qwen3_4b_mixed_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-4B-Instruct-2507",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-03",
+   "files": [
+    "qwen3_4b_instruct_2507_mixed_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-4B-Thinking-2507",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-4B-Thinking-2507",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Qwen3_4b_thinking_dynamic_wi4b32_afp32.litertlm",
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-8B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-8B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-05",
+   "files": [
+    "qwen3_8b_channelwise_int8_float32kv.litertlm",
+    "qwen3_8b_mixed_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3-ASR-0.6B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3-ASR-0.6B",
+   "pipeline_tag": "automatic-speech-recognition",
+   "last_modified": "2026-09-03",
+   "files": [
+    "qwen3_asr_0.6b_5s_i8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3.5-0.8B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3.5-0.8B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Qwen3.5-0.8B-VL_int8.litertlm",
+    "Qwen3.5-0.8B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3.5-2B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3.5-2B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Qwen3.5-2B-VL_int8.litertlm",
+    "Qwen3.5-2B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Qwen3.5-4B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Qwen/Qwen3.5-4B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Qwen3.5-4B_int8.litertlm",
+    "Qwen3.5-4B_mixed_int4.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/sarashina2.2-0.5b-instruct-v0.1",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "sbintuitions/sarashina2.2-0.5b-instruct-v0.1",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "sarashina2.2-0.5b-instruct-v0.1_int4.litertlm",
+    "sarashina2.2-0.5b-instruct-v0.1_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/sarashina2.2-1b-instruct-v0.1",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "sbintuitions/sarashina2.2-1b-instruct-v0.1",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "sarashina2.2-1b-instruct-v0.1_int4.litertlm",
+    "sarashina2.2-1b-instruct-v0.1_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Shieldstral-1.0-3B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "mistralai/Shieldstral-1.0-3B",
+   "pipeline_tag": null,
+   "last_modified": "2026-09-04",
+   "files": [
+    "Shieldstral-1.0-3B-vision_int4.litertlm",
+    "Shieldstral-1.0-3B-vision_int4_gpu.litertlm",
+    "Shieldstral-1.0-3B_int4.litertlm",
+    "Shieldstral-1.0-3B_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/SmolLM2-135M-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-01",
+   "files": [
+    "SmolLM2_135M_Instruct.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/SmolLM2-360M-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "HuggingFaceTB/SmolLM2-360M-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-05-07",
+   "files": [
+    "SmolLM2_360M_instruct.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/SmolLM3-3B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "HuggingFaceTB/SmolLM3-3B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "SmolLM3-3B.litertlm",
+    "SmolLM3-3B_q4_block32_ekv4096.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/SmolVLM2-2.2B",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-04",
+   "files": [
+    "SmolVLM2-2.2B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/SmolVLM2-500M",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+   "pipeline_tag": "image-text-to-text",
+   "last_modified": "2026-09-05",
+   "files": [
+    "SmolVLM2-500M.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/TinySwallow-1.5B-Instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "SakanaAI/TinySwallow-1.5B-Instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-06-01",
+   "files": [
+    "TinySwallow-1.5B-Instruct.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/VibeThinker-1.5B",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "WeiboAI/VibeThinker-1.5B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-05-27",
+   "files": [
+    "VibeThinker-1.5B.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/VibeThinker-3B",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "WeiboAI/VibeThinker-3B",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "model.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/VibeVoice-ASR-BitNet",
+   "gated": false,
+   "license": "mit",
+   "license_name": null,
+   "base_model": "microsoft/VibeVoice-ASR-BitNet",
+   "pipeline_tag": "automatic-speech-recognition",
+   "last_modified": "2026-09-04",
+   "files": [
+    "VibeVoice-ASR-BitNet.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Zamba2-1.2B-instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Zyphra/Zamba2-1.2B-instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-05",
+   "files": [
+    "Zamba2-1.2B-instruct_int8.litertlm"
+   ]
+  },
+  {
+   "id": "litert-community/Zamba2-2.7B-instruct",
+   "gated": false,
+   "license": "apache-2.0",
+   "license_name": null,
+   "base_model": "Zyphra/Zamba2-2.7B-instruct",
+   "pipeline_tag": "text-generation",
+   "last_modified": "2026-09-04",
+   "files": [
+    "Zamba2-2.7B-instruct_int8.litertlm"
+   ]
+  }
+ ]
+}
