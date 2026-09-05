@@ -17,7 +17,7 @@
 <!-- gen:recipes-table:start -->
 | Recipe | Question it answers | Runtime | Verified on | Status |
 |---|---|---|---|---|
-| [Background removal (ormbg) in an existing Android app, GPU](https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md) (`ormbg-android-gpu`) | PyTorch model on Android without ONNX | LiteRT 2.2.0, `CompiledModel` GPU | Pixel 8a (Android 16), GPU: 246 ms per image for the model, 361 ms end to end, 246/246 ops on the GPU, 2026-09-05 | in progress: guide and recipe.json written on branch `recipe/ormbg-integration`, push pending |
+| [Background removal (ormbg) in an existing Android app, GPU](https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md) (`ormbg-android-gpu`) | PyTorch model on Android without ONNX | LiteRT 2.2.0, `CompiledModel` GPU | Pixel 8a (Android 16), GPU: 246 ms per image for the model, 361 ms end to end, 246/246 ops on the GPU, 2026-09-05 | verified |
 | Offline chat with Qwen2.5-1.5B-Instruct in an existing Android app (`android-llm-chat`) | LiteRT-LM models other than Gemma | LiteRT-LM 0.16.1 (`litertlm-android`) | none yet | planned |
 | A fine-tuned Hugging Face model in an existing iPhone app (`hf-finetune-iphone`) | fine-tuned HF model on iPhone | swift-litert-lm 0.1.1 + hf-to-litertlm | none yet | planned |
 <!-- gen:recipes-table:end -->
