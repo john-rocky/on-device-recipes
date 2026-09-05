@@ -244,7 +244,7 @@ Not verified:
 - Converted and verified by: litert-community (Google AI Edge) published the bundle; integration and verification by john-rocky
 - Recipe: https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md
 - Measurements: section 7 above (Pixel 8a, 2026-09-05)
-- Commit: PENDING
+- Commit: john-rocky/on-device-recipes@086a791 (the recipe, the files and the device rows above)
 - Maintained at: https://github.com/john-rocky/on-device-recipes/issues
 
 Last verified: 2026-09-05

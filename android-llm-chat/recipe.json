@@ -149,8 +149,9 @@
     "converted_by": "litert-community (Google AI Edge) published the bundle; integration and verification by john-rocky",
     "recipe_origin": "https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md",
     "measurement_report": "https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md#7-verified--unverified",
-    "commit": "PENDING: set to the commit that adds this file",
-    "maintainer": "https://github.com/john-rocky/on-device-recipes/issues"
+    "commit": "john-rocky/on-device-recipes@086a791",
+    "maintainer": "https://github.com/john-rocky/on-device-recipes/issues",
+    "commit_note": "086a791 adds the recipe, the drop-in files, the test and the device rows above; this field is set in the follow-up commit"
   },
   "regate": {
     "litertlm_android_0_17_0": "On Google Maven since 2026-09-04 (no GitHub release on 2026-09-05). Its Kotlin metadata is 2.4.0; the Kotlin built into AGP 9.3.1 (2.2) refuses it: 'Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 2.4.0, expected version is 2.2.0'. Compiled with -Xskip-metadata-version-check it passed all five checks on the CPU backend (devices[2]). The recipe stays on 0.16.1 until a toolchain with Kotlin 2.4 support is verified.",
