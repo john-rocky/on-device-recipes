@@ -36,7 +36,7 @@
     "source": {
       "type": "string",
       "format": "uri",
-      "description": "Hub-added. Raw URL of the canonical recipe.json this entry was vendored from. tools/check_drift.py compares the entry against it; absent while the canonical file does not exist yet."
+      "description": "Hub-added. Raw URL of the canonical recipe.json this entry was vendored from. tools/check_drift.py compares the entry against it; absent while the canonical file is not published yet, required once status is verified."
     },
     "model": {
       "type": "object",
@@ -128,7 +128,7 @@
     {
       "if": { "properties": { "status": { "const": "verified" } }, "required": ["status"] },
       "then": {
-        "required": ["integrate", "verify", "devices", "unverified", "question_page"],
+        "required": ["integrate", "verify", "devices", "unverified", "question_page", "source"],
         "properties": {
           "model": { "required": ["hf_repo", "file", "sha256", "bytes", "license"] },
           "devices": { "minItems": 1, "items": { "required": ["name", "os", "date"] } },

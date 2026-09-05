@@ -11,7 +11,7 @@ Numbers are measurements on named devices with dates; there are no estimates. Ea
 ## Recipes
 
 - [recipes.json](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/recipes.json): machine-readable index of every recipe; schema at [recipe.schema.json](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/schemas/recipe.schema.json).
-- [Background removal (ormbg) in an existing Android app, on the GPU](https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md): LiteRT 2.2.0 CompiledModel, litert-torch conversion with one align_corners patch, 246/246 ops on the GPU, Pixel 8a. Status: in progress.
+- [Background removal (ormbg) in an existing Android app, on the GPU](https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md): LiteRT 2.2.0 CompiledModel, litert-torch conversion with one align_corners patch, 246/246 ops on the GPU; Pixel 8a (Android 16): 246 ms per image for the model, 361 ms end to end, measured 2026-09-05. Status: in progress, publication pending.
 
 ## Attribution
 

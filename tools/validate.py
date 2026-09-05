@@ -8,6 +8,11 @@ Exit 1 with a readable report on any problem. Run from anywhere:
 Checks: every entry is valid against the schema; ids are unique; question_page files
 exist; every published question page starts with a question H1 and carries a
 "Last verified" line near the top.
+
+    python tools/validate.py --recipe path/to/recipe.json
+
+validates one canonical recipe.json (the file that lives next to an INTEGRATION guide)
+as if it were a verified hub entry, so a recipe author can check it before publishing.
 """
 
 from __future__ import annotations
@@ -84,13 +89,40 @@ def check_pages(root: Path) -> list[str]:
     return problems
 
 
+def check_single(path: Path, schema: dict) -> list[str]:
+    """Validate one canonical recipe.json (no hub-added keys) as if it were a verified hub entry."""
+    recipe = json.loads(path.read_text(encoding="utf-8"))
+    probe = {"id": "probe", "platform": "android", "status": "verified", "question_page": "docs/index.md", "source": "https://example.invalid/recipe.json"}
+    probe.update(recipe)
+    validator = Draft202012Validator(schema)
+    out = []
+    for err in sorted(validator.iter_errors(probe), key=lambda e: list(e.path)):
+        where = "/".join(str(p) for p in err.path) or "(root)"
+        out.append(f"{path}: {where}: {err.message}")
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parent.parent)
+    parser.add_argument(
+        "--recipe",
+        type=Path,
+        help="validate one canonical recipe.json against the schema (as a verified entry) instead of the hub index",
+    )
     args = parser.parse_args(argv)
     root = args.root.resolve()
     index, schema = load(root)
     Draft202012Validator.check_schema(schema)
+    if args.recipe:
+        problems = check_single(args.recipe, schema)
+        if problems:
+            print("validate: FAILED")
+            for p in problems:
+                print(f"  - {p}")
+            return 1
+        print(f"validate: OK ({args.recipe} is a complete, verified-grade recipe)")
+        return 0
     problems = check_recipes(root, index, schema) + check_pages(root)
     if problems:
         print("validate: FAILED")
