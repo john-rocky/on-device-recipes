@@ -1,0 +1,341 @@
+{
+ "measured": "2026-09-05",
+ "machine": "Apple M4 Max, macOS 27.0 (26A5416b), arm64",
+ "model": "tasks/assets/T06/model.py TinyHybridNet (conv stem + nn.MultiheadAttention block + head), input 1x3x224x224, weights seed 0 + randomised BN/pos (probe T06 Fable recipe)",
+ "protocol": "golden + 8 random inputs (scales 1.0/3.0/0.1), atol 1e-4, rtol 1e-3, argmax equal; each route's own Python runtime on the Mac CPU",
+ "rows": [
+  {
+   "route": "litert-torch",
+   "converter": "litert-torch 0.9.4",
+   "converter_call": "litert_torch.convert(model, (x,)).export('model.tflite')",
+   "runtime": "ai-edge-litert 2.2.0 Interpreter (CPU)",
+   "artifact": "tinyhybridnet.tflite",
+   "artifact_bytes": 1073260,
+   "convert_seconds": 1.0279642078094184,
+   "env": {
+    "python": "3.12.13",
+    "torch": "2.13.0",
+    "machine": "arm64",
+    "macos": "27.0",
+    "date": "2026-09-05"
+   },
+   "parity": {
+    "ok": true,
+    "worst_abs": 6.854534149169922e-07,
+    "worst_rel": 0.0007454889127984643
+   },
+   "mac_cpu_latency_ms_median": 2.2704380098730326,
+   "ops": {
+    "TRANSPOSE": 9,
+    "PAD": 3,
+    "CONV_2D": 3,
+    "GELU": 4,
+    "RESHAPE": 21,
+    "ADD": 9,
+    "MEAN": 6,
+    "SQUARED_DIFFERENCE": 3,
+    "RSQRT": 3,
+    "MUL": 8,
+    "SUB": 3,
+    "FULLY_CONNECTED": 5,
+    "SLICE": 3,
+    "BATCH_MATMUL": 2,
+    "SOFTMAX": 1,
+    "SUM": 1,
+    "DELEGATE": 1
+   },
+   "compiled_model_cpu": {
+    "fully_accelerated": true,
+    "parity": {
+     "ok": true,
+     "worst_abs": 6.854534149169922e-07,
+     "worst_rel": 0.0007454889127984643
+    },
+    "latency_ms_median": 2.3171460488811135
+   },
+   "compiled_model_gpu": "not run: RuntimeError: ERROR: [./litert/cc/litert_compiled_model.h:1895]"
+  },
+  {
+   "route": "executorch",
+   "converter": "executorch 1.4.1 (torch.export -> to_edge_transform_and_lower, XnnpackPartitioner)",
+   "converter_call": "to_edge_transform_and_lower(torch.export.export(model,(x,)), partitioner=[XnnpackPartitioner()]).to_executorch()",
+   "runtime": "executorch 1.4.1 Python runtime (XNNPACK delegate, CPU)",
+   "artifact": "tinyhybridnet_xnnpack.pte",
+   "artifact_bytes": 1073320,
+   "convert_seconds": 2.4847822908777744,
+   "env": {
+    "python": "3.12.13",
+    "torch": "2.13.0",
+    "machine": "arm64",
+    "macos": "27.0",
+    "date": "2026-09-05"
+   },
+   "parity": {
+    "ok": true,
+    "worst_abs": 6.854534149169922e-07,
+    "worst_rel": 0.0005987586919218302
+   },
+   "mac_cpu_latency_ms_median": 3.9552919333800673,
+   "delegate_calls": 9,
+   "non_delegated_ops": {
+    "getitem": 15,
+    "alloc": 27,
+    "native_layer_norm.out": 3,
+    "unsqueeze_copy.out": 1,
+    "squeeze_copy.dims_out": 1,
+    "select_copy.int_out": 3,
+    "mul.Scalar_out": 2,
+    "expand_copy.out": 4,
+    "eq.Scalar_out": 1,
+    "full_like.out": 1,
+    "logical_not.out": 2,
+    "any.out": 1,
+    "where.self_out": 1,
+    "mean.out": 1
+   }
+  },
+  {
+   "route": "onnx-runtime",
+   "converter": "torch.onnx.export (torch 2.13.0, opset 18, TorchScript tracer, MHA fastpath disabled)",
+   "converter_call": "torch.onnx.export(model, (x,), 'model.onnx', opset_version=18, dynamo=False)",
+   "runtime": "onnxruntime 1.29.0 CPUExecutionProvider",
+   "artifact": "tinyhybridnet.onnx",
+   "artifact_bytes": 1065628,
+   "convert_seconds": 0.10273375012911856,
+   "env": {
+    "python": "3.12.13",
+    "torch": "2.13.0",
+    "machine": "arm64",
+    "macos": "27.0",
+    "date": "2026-09-05"
+   },
+   "parity": {
+    "ok": true,
+    "worst_abs": 7.450580596923828e-07,
+    "worst_rel": 0.00029038902721367776
+   },
+   "mac_cpu_latency_ms_median": 1.561937970109284,
+   "ops": {
+    "Identity": 5,
+    "Constant": 41,
+    "Conv": 3,
+    "Div": 5,
+    "Erf": 4,
+    "Add": 11,
+    "Mul": 10,
+    "Shape": 3,
+    "Slice": 4,
+    "Concat": 2,
+    "Reshape": 12,
+    "Transpose": 9,
+    "LayerNormalization": 3,
+    "MatMul": 5,
+    "Mod": 1,
+    "Unsqueeze": 1,
+    "Squeeze": 1,
+    "Gather": 3,
+    "Cast": 2,
+    "Sqrt": 3,
+    "Softmax": 1,
+    "Gemm": 2,
+    "ReduceMean": 1
+   }
+  },
+  {
+   "route": "litert-torch",
+   "converter": "litert-torch 0.9.4",
+   "converter_call": "litert_torch.convert(model, (x,)).export('model.tflite')",
+   "runtime": "ai-edge-litert 2.2.0 Interpreter (CPU)",
+   "artifact": "tinyhybridnet.tflite",
+   "artifact_bytes": 1073260,
+   "convert_seconds": 2.2382528339512646,
+   "env": {
+    "python": "3.14.6",
+    "torch": "2.13.0",
+    "machine": "arm64",
+    "macos": "27.0",
+    "date": "2026-09-05"
+   },
+   "parity": {
+    "ok": true,
+    "worst_abs": 6.854534149169922e-07,
+    "worst_rel": 0.0007454889127984643
+   },
+   "mac_cpu_latency_ms_median": 2.3324579233303666,
+   "ops": {
+    "TRANSPOSE": 9,
+    "PAD": 3,
+    "CONV_2D": 3,
+    "GELU": 4,
+    "RESHAPE": 21,
+    "ADD": 9,
+    "MEAN": 6,
+    "SQUARED_DIFFERENCE": 3,
+    "RSQRT": 3,
+    "MUL": 8,
+    "SUB": 3,
+    "FULLY_CONNECTED": 5,
+    "SLICE": 3,
+    "BATCH_MATMUL": 2,
+    "SOFTMAX": 1,
+    "SUM": 1,
+    "DELEGATE": 1
+   },
+   "compiled_model_cpu": {
+    "fully_accelerated": true,
+    "parity": {
+     "ok": true,
+     "worst_abs": 6.854534149169922e-07,
+     "worst_rel": 0.0007454889127984643
+    },
+    "latency_ms_median": 2.3750204127281904
+   },
+   "compiled_model_gpu": "not run: RuntimeError: ERROR: [./litert/cc/litert_compiled_model.h:1895]"
+  },
+  {
+   "route": "executorch",
+   "converter": "executorch 1.4.1 (torch.export -> to_edge_transform_and_lower, XnnpackPartitioner)",
+   "converter_call": "to_edge_transform_and_lower(torch.export.export(model,(x,)), partitioner=[XnnpackPartitioner()]).to_executorch()",
+   "runtime": "executorch 1.4.1 Python runtime (XNNPACK delegate, CPU)",
+   "artifact": "tinyhybridnet_xnnpack.pte",
+   "artifact_bytes": 1073320,
+   "convert_seconds": 2.5299563340377063,
+   "env": {
+    "python": "3.14.6",
+    "torch": "2.13.0",
+    "machine": "arm64",
+    "macos": "27.0",
+    "date": "2026-09-05"
+   },
+   "parity": {
+    "ok": true,
+    "worst_abs": 6.854534149169922e-07,
+    "worst_rel": 0.0005987586919218302
+   },
+   "mac_cpu_latency_ms_median": 3.8956875214353204,
+   "delegate_calls": 9,
+   "non_delegated_ops": {
+    "getitem": 15,
+    "alloc": 27,
+    "native_layer_norm.out": 3,
+    "unsqueeze_copy.out": 1,
+    "squeeze_copy.dims_out": 1,
+    "select_copy.int_out": 3,
+    "mul.Scalar_out": 2,
+    "expand_copy.out": 4,
+    "eq.Scalar_out": 1,
+    "full_like.out": 1,
+    "logical_not.out": 2,
+    "any.out": 1,
+    "where.self_out": 1,
+    "mean.out": 1
+   }
+  },
+  {
+   "route": "onnx-runtime",
+   "converter": "torch.onnx.export (torch 2.13.0, opset 18, TorchScript tracer, MHA fastpath disabled)",
+   "converter_call": "torch.onnx.export(model, (x,), 'model.onnx', opset_version=18, dynamo=False)",
+   "runtime": "onnxruntime 1.29.0 CPUExecutionProvider",
+   "artifact": "tinyhybridnet.onnx",
+   "artifact_bytes": 1065628,
+   "convert_seconds": 0.11807287507690489,
+   "env": {
+    "python": "3.14.6",
+    "torch": "2.13.0",
+    "machine": "arm64",
+    "macos": "27.0",
+    "date": "2026-09-05"
+   },
+   "parity": {
+    "ok": true,
+    "worst_abs": 7.450580596923828e-07,
+    "worst_rel": 0.00029038902721367776
+   },
+   "mac_cpu_latency_ms_median": 1.6042080242186785,
+   "ops": {
+    "Identity": 5,
+    "Constant": 41,
+    "Conv": 3,
+    "Div": 5,
+    "Erf": 4,
+    "Add": 11,
+    "Mul": 10,
+    "Shape": 3,
+    "Slice": 4,
+    "Concat": 2,
+    "Reshape": 12,
+    "Transpose": 9,
+    "LayerNormalization": 3,
+    "MatMul": 5,
+    "Mod": 1,
+    "Unsqueeze": 1,
+    "Squeeze": 1,
+    "Gather": 3,
+    "Cast": 2,
+    "Sqrt": 3,
+    "Softmax": 1,
+    "Gemm": 2,
+    "ReduceMean": 1
+   }
+  }
+ ],
+ "litert_attention_4d_rewrite": {
+  "python": "3.12.13",
+  "torch_equivalence_max_abs": 1.6391277313232422e-07,
+  "artifact_bytes": 1069992,
+  "max_tensor_rank": 4,
+  "ops": {
+   "TRANSPOSE": 7,
+   "PAD": 3,
+   "CONV_2D": 3,
+   "GELU": 4,
+   "RESHAPE": 20,
+   "ADD": 9,
+   "MEAN": 6,
+   "SQUARED_DIFFERENCE": 3,
+   "RSQRT": 3,
+   "MUL": 7,
+   "SUB": 3,
+   "FULLY_CONNECTED": 5,
+   "SLICE": 3,
+   "BATCH_MATMUL": 2,
+   "SOFTMAX": 1,
+   "SUM": 1,
+   "DELEGATE": 1
+  },
+  "compiled_model_cpu": {
+   "fully_accelerated": true,
+   "parity": {
+    "ok": true,
+    "worst_abs": 6.854534149169922e-07,
+    "worst_rel": 0.0006195986061356962
+   },
+   "latency_ms_median": 2.287562587298453
+  },
+  "compiled_model_gpu_metal_default_fp16": {
+   "fully_accelerated": true,
+   "parity": {
+    "ok": false,
+    "worst_abs": 0.002795398235321045,
+    "worst_rel": 0.47970783710479736
+   },
+   "latency_ms_median": 0.7675630040466785,
+   "argmax_matches": 9,
+   "cases": 9
+  },
+  "compiled_model_gpu_metal_enforce_f32": {
+   "fully_accelerated": true,
+   "parity": {
+    "ok": true,
+    "worst_abs": 3.5762786865234375e-07,
+    "worst_rel": 0.00010887809912674129
+   },
+   "latency_ms_median": 0.6498536095023155
+  }
+ },
+ "unmodified_model_compiled_model_gpu_metal_error": "Following operations are not supported by GPU delegate: RESHAPE: Tensor dimensions must be less than 5 (MultiheadAttention) x2; TRANSPOSE: Permutation for transpose is invalid. 54 operations will run on the GPU, and the remaining 30 operations will run on the CPU. -> RuntimeError litert_compiled_model.h:1895 (CompiledModel has no CPU fallback)",
+ "pip": {
+  "python3.12": "pip install ai-edge-litert litert-torch -> ai-edge-litert 2.2.0, litert-torch 0.9.4, litert-converter 0.4.0 (cp312), torch 2.13.0, jax 0.11.1, transformers 5.16.1; no tensorflow; venv 2.0 GB, 93 packages",
+  "python3.14": "same command -> same versions with the litert-converter 0.4.0 cp314 wheel; executorch 1.4.1 (cp314) and onnxruntime 1.29.0 also installed and ran"
+ }
+}

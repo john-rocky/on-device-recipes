@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/schemas/recipe.schema.json",
+  "title": "On-device recipe",
+  "description": "One recipe = one model on one runtime, added to an existing app and verified on named devices. The recipe.json that lives next to each recipe's INTEGRATION guide (see provenance.recipe_origin) is the source of truth; this schema follows its keys. The hub adds id, title, platform, status, question_page and source when it vendors the file into recipes.json. Every number must come from a measurement on a named device with a date; the schema has no field for estimates.",
+  "type": "object",
+  "required": ["id", "task", "platform", "status", "model", "runtime", "provenance"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$",
+      "description": "Hub-added. Stable identifier, also the anchor used by docs and llms.txt."
+    },
+    "title": {
+      "type": "string",
+      "description": "Hub-added. One line for index tables."
+    },
+    "task": {
+      "type": "string",
+      "description": "The request a developer or an agent would make, in natural language. Example: \"Add background removal (person segmentation) to an existing Android app, on the GPU\"."
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["android", "ios", "macos", "linux", "windows", "web"],
+      "description": "Hub-added."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["verified", "in_progress", "planned"],
+      "description": "Hub-added. verified = INTEGRATION guide published, verify command run on at least one device row with a date. in_progress = code exists, guide or dated verification pending. planned = entry reserved, nothing to run yet."
+    },
+    "question_page": {
+      "type": "string",
+      "description": "Hub-added. Repo-relative path of the question page that leads to this recipe."
+    },
+    "source": {
+      "type": "string",
+      "format": "uri",
+      "description": "Hub-added. Raw URL of the canonical recipe.json this entry was vendored from. tools/check_drift.py compares the entry against it; absent while the canonical file does not exist yet."
+    },
+    "model": {
+      "type": "object",
+      "description": "The exact model file the recipe uses.",
+      "properties": {
+        "hf_repo": { "type": "string", "description": "Hugging Face repo id, e.g. litert-community/ormbg-LiteRT." },
+        "file": { "type": "string", "description": "File name inside hf_repo." },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "license": { "type": "string", "description": "SPDX-style id as written on the card, e.g. apache-2.0." },
+        "base_model": { "type": "string", "description": "Upstream model the file was converted from, as a Hugging Face repo id." }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "maven": { "type": "string", "description": "Android: group:artifact without the version." },
+        "spm": { "type": "string", "format": "uri", "description": "iOS/macOS: Swift package URL." },
+        "pip": { "type": "string", "description": "Desktop/CLI: package name." }
+      }
+    },
+    "convert": {
+      "type": "object",
+      "properties": {
+        "tool": { "type": "string" },
+        "version": { "type": "string" },
+        "script": { "type": "string", "description": "Path of the conversion script inside the canonical repo." },
+        "patches": { "type": "array", "items": { "type": "string" }, "description": "Graph changes applied before conversion, one line each. Empty when the model converts as-is." }
+      }
+    },
+    "integrate": {
+      "type": "object",
+      "properties": {
+        "files": { "type": "array", "items": { "type": "string" }, "description": "Files to copy into the existing app, paths inside the canonical repo." },
+        "deps": { "type": "array", "items": { "type": "string" }, "description": "Dependency lines exactly as they go into the build file." },
+        "min_sdk": { "type": "integer", "description": "Android minSdk." },
+        "min_os": { "type": "string", "description": "iOS/macOS minimum OS version." }
+      }
+    },
+    "verify": {
+      "type": "object",
+      "required": ["command", "expected"],
+      "properties": {
+        "command": { "type": "string", "description": "One command that proves the integration works." },
+        "expected": { "type": "string", "description": "What the command prints or asserts when it passes, taken from an actual run." }
+      }
+    },
+    "devices": {
+      "type": "array",
+      "description": "One row per device the verify command was run on. Numbers are from that run.",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "os": { "type": "string" },
+          "date": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", "description": "Date of the run, YYYY-MM-DD." },
+          "accelerator": { "type": "string", "description": "cpu, gpu, npu, or the vendor backend name." },
+          "ms_per_frame": { "type": "number" },
+          "gpu_nodes": { "type": "string", "description": "Ops placed on the accelerator over total, e.g. \"246/246\"." },
+          "tok_per_s": { "type": "number", "description": "LLM decode throughput." },
+          "ttft_s": { "type": "number", "description": "LLM time to first token in seconds." },
+          "parity": { "type": "string", "description": "Agreement with the reference (correlation or max abs diff) as reported." },
+          "source": { "type": "string", "description": "Where the row was published if not measured for this recipe entry, e.g. a README at a commit." }
+        }
+      }
+    },
+    "unverified": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What was not tested, one line each (emulator, other devices, other OS versions)."
+    },
+    "provenance": {
+      "type": "object",
+      "description": "The five-line attribution block. See docs/provenance.md.",
+      "properties": {
+        "converted_by": { "type": "string", "description": "Handle(s) of whoever converted and verified. No real names." },
+        "recipe_origin": { "type": "string", "format": "uri", "description": "URL of the canonical INTEGRATION guide." },
+        "measurement_report": { "type": "string", "format": "uri", "description": "URL of the report the device rows come from." },
+        "commit": { "type": "string", "description": "Commit of the canonical repo the numbers were taken at, as repo@sha or a bare sha." },
+        "maintainer": { "type": "string", "format": "uri", "description": "Where to file an issue when the recipe breaks." }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "verified" } }, "required": ["status"] },
+      "then": {
+        "required": ["integrate", "verify", "devices", "unverified", "question_page"],
+        "properties": {
+          "model": { "required": ["hf_repo", "file", "sha256", "bytes", "license"] },
+          "devices": { "minItems": 1, "items": { "required": ["name", "os", "date"] } },
+          "provenance": { "required": ["converted_by", "recipe_origin", "measurement_report", "commit", "maintainer"] }
+        }
+      }
+    }
+  ]
+}

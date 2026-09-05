@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "updated": "2026-09-05",
+  "schema": "schemas/recipe.schema.json",
+  "note": "Each entry mirrors the recipe.json that lives next to the recipe's INTEGRATION guide (provenance.recipe_origin). That file is the source of truth; tools/check_drift.py fails CI when an entry with a source URL differs from it. Numbers are from dated runs on named devices; entries with status planned or in_progress carry only what is already published.",
+  "recipes": [
+    {
+      "id": "ormbg-android-gpu",
+      "title": "Background removal (ormbg) in an existing Android app, on the GPU",
+      "task": "Add background removal (person segmentation) to an existing Android app, on the GPU",
+      "platform": "android",
+      "status": "in_progress",
+      "question_page": "docs/pytorch-model-on-android-without-onnx.md",
+      "model": {
+        "hf_repo": "litert-community/ormbg-LiteRT",
+        "file": "ormbg.tflite",
+        "sha256": "f6e359cf35c55e7bf216eb3141f6d76828667a5e8e67a929f53e9f7f38fae030",
+        "bytes": 176240148,
+        "license": "apache-2.0",
+        "base_model": "schirrmacher/ormbg"
+      },
+      "runtime": {
+        "name": "LiteRT (CompiledModel API)",
+        "maven": "com.google.ai.edge.litert:litert",
+        "version": "2.2.0"
+      },
+      "convert": {
+        "tool": "litert-torch",
+        "script": "ormbg/scripts/build_ormbg.py",
+        "patches": [
+          "F.interpolate align_corners=True -> False on the bilinear upsamples (the GPU delegate rejects align_corners=True)"
+        ]
+      },
+      "integrate": {
+        "files": ["ormbg/app/src/main/java/com/ormbg/BgRemover.kt"],
+        "deps": ["implementation(\"com.google.ai.edge.litert:litert:2.2.0\")"],
+        "min_sdk": 26
+      },
+      "devices": [
+        {
+          "name": "Pixel 8a",
+          "accelerator": "gpu",
+          "ms_per_frame": 10,
+          "gpu_nodes": "246/246",
+          "parity": "device corr 0.999881 vs PyTorch",
+          "source": "LiteRT-Models ormbg/README.md, unchanged since commit 0c48ff1 (2026-07-07); a dated re-run with the verify command is pending"
+        }
+      ],
+      "unverified": [
+        "Android emulator: CompiledModel GPU does not run on the emulator",
+        "devices other than Pixel 8a"
+      ],
+      "provenance": {
+        "converted_by": "john-rocky",
+        "recipe_origin": "https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md",
+        "measurement_report": "https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/README.md#gpu-conversion",
+        "commit": "john-rocky/LiteRT-Models@47c4ccc5041fa9ccaa0d5b8a6856c67fa4060ea3",
+        "maintainer": "https://github.com/john-rocky/LiteRT-Models/issues"
+      }
+    },
+    {
+      "id": "android-llm-chat",
+      "title": "Offline chat with Qwen2.5-1.5B-Instruct in an existing Android app (LiteRT-LM)",
+      "task": "Add a chat that needs no network, using Qwen2.5-1.5B-Instruct, to an existing Android app",
+      "platform": "android",
+      "status": "planned",
+      "question_page": "docs/litert-lm-models-other-than-gemma.md",
+      "model": {
+        "hf_repo": "litert-community/Qwen2.5-1.5B-Instruct",
+        "license": "apache-2.0",
+        "base_model": "Qwen/Qwen2.5-1.5B-Instruct"
+      },
+      "runtime": {
+        "name": "LiteRT-LM",
+        "maven": "com.google.ai.edge.litertlm:litertlm-android",
+        "version": "0.16.1"
+      },
+      "unverified": [
+        "everything: the recipe directory android-llm-chat/ is not written yet"
+      ],
+      "provenance": {
+        "converted_by": "litert-community (Google AI Edge) published the bundle; integration and verification by john-rocky",
+        "recipe_origin": "https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md",
+        "measurement_report": "https://github.com/john-rocky/apple-silicon-llm-bench/blob/main/results/android/litertlm-qwen2.5-1.5b-mac-galaxy-s26.md",
+        "maintainer": "https://github.com/john-rocky/on-device-recipes/issues"
+      }
+    },
+    {
+      "id": "hf-finetune-iphone",
+      "title": "A fine-tuned Hugging Face model in an existing iPhone app (hf-to-litertlm + swift-litert-lm)",
+      "task": "Run a fine-tuned Hugging Face model in an existing iPhone app",
+      "platform": "ios",
+      "status": "planned",
+      "question_page": "docs/fine-tuned-hf-model-on-iphone.md",
+      "model": {},
+      "runtime": {
+        "name": "swift-litert-lm (LiteRT-LM Swift SDK)",
+        "spm": "https://github.com/john-rocky/swift-litert-lm",
+        "version": "0.1.1"
+      },
+      "convert": {
+        "tool": "hf-to-litertlm",
+        "script": "scripts/convert.py"
+      },
+      "unverified": [
+        "everything: the representative fine-tune is not chosen yet; iPhone rows need a physical device, the simulator cannot run the bundle"
+      ],
+      "provenance": {
+        "converted_by": "john-rocky",
+        "recipe_origin": "https://github.com/john-rocky/swift-litert-lm/blob/main/docs/recipe-hf-finetune-to-iphone.md",
+        "maintainer": "https://github.com/john-rocky/swift-litert-lm/issues"
+      }
+    }
+  ]
+}

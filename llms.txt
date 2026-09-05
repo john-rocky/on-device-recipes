@@ -1,0 +1,24 @@
+# On-device recipes
+
+> Device-verified recipes for adding on-device AI to an existing iOS or Android app. Each page answers one developer question in its first 300 words, then leads to a recipe with the dependency line, the file to copy, the model file with its sha256, a verify command with its expected output, and the devices it was verified on with dates.
+
+Numbers are measurements on named devices with dates; there are no estimates. Each recipe's source of truth is the INTEGRATION guide in the repository that ships the code; this site mirrors it and fails CI on drift. Maintainer handle: john-rocky. Last verified 2026-09-05.
+
+## Questions
+
+- [Can I run a PyTorch model on Android without going through ONNX?](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/docs/pytorch-model-on-android-without-onnx.md): yes; litert-torch (torch.export to .tflite, no ONNX, no TensorFlow), ExecuTorch and ONNX Runtime measured on one conv + transformer model, parity within 7.5e-7 of PyTorch, the LiteRT CompiledModel GPU rank-4 and fp16 rules, quick start for all three routes.
+
+## Recipes
+
+- [recipes.json](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/recipes.json): machine-readable index of every recipe; schema at [recipe.schema.json](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/schemas/recipe.schema.json).
+- [Background removal (ormbg) in an existing Android app, on the GPU](https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md): LiteRT 2.2.0 CompiledModel, litert-torch conversion with one align_corners patch, 246/246 ops on the GPU, Pixel 8a. Status: in progress.
+
+## Attribution
+
+- [Provenance block](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/docs/provenance.md): the five lines every recipe, model card and page carries (converted and verified by, recipe, measurements, commit, maintained at), and where they go in a recipe, a Hugging Face card and a pull request.
+
+## Optional
+
+- [Measurement record: one PyTorch model through three Android converters](https://github.com/john-rocky/on-device-recipes/tree/main/measurements/pytorch-android-three-routes): scripts and JSON behind the Mac numbers on the PyTorch page, measured 2026-09-05.
+- [Controlled Android run of the same model on a Galaxy S26 and an API 36 emulator](https://github.com/john-rocky/apple-silicon-llm-bench/blob/main/results/android/tinyhybridnet-three-runtimes.md): ExecuTorch, LiteRT and ONNX Runtime, one process per device, measured 2026-09-05.
+- [AGENTS.md](https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/AGENTS.md): ten lines for coding agents.

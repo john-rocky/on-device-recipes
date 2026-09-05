@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated output of tools/render.py (checked in only via the gen: regions it fills)
+out/
+
+# Model artifacts are never committed; recipes point at the Hugging Face file + sha256
+*.tflite
+*.pte
+*.onnx
+*.litertlm
+*.pt
+*.pth
+
+# Jekyll (GitHub Pages builds docs/ on its side)
+_site/
+.jekyll-cache/
+
+.DS_Store

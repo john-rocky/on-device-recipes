@@ -1,0 +1,11 @@
+title: On-device recipes
+description: Device-verified recipes for adding on-device AI to an existing iOS or Android app
+theme: jekyll-theme-primer
+# These plugins are on by default for GitHub Pages; listed so a local `jekyll serve` matches.
+plugins:
+  - jekyll-optional-front-matter
+  - jekyll-relative-links
+  - jekyll-titles-from-headings
+  - jekyll-default-layout
+relative_links:
+  enabled: true
