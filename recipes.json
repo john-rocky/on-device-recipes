@@ -105,28 +105,166 @@
     {
       "id": "android-llm-chat",
       "title": "Offline chat with Qwen2.5-1.5B-Instruct in an existing Android app (LiteRT-LM)",
-      "task": "Add a chat that needs no network, using Qwen2.5-1.5B-Instruct, to an existing Android app",
       "platform": "android",
-      "status": "planned",
+      "status": "verified",
       "question_page": "docs/litert-lm-models-other-than-gemma.md",
+      "source": "https://raw.githubusercontent.com/john-rocky/on-device-recipes/main/android-llm-chat/recipe.json",
+      "task": "Add a chat that needs no network, using Qwen2.5-1.5B-Instruct, to an existing Android app",
       "model": {
         "hf_repo": "litert-community/Qwen2.5-1.5B-Instruct",
+        "file": "Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm",
+        "url": "https://huggingface.co/litert-community/Qwen2.5-1.5B-Instruct/resolve/main/Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm",
+        "sha256": "faa60663b333290c1496c499828b21d3e3254a788cacd8cce917ce0f761a2dc9",
+        "bytes": 1597931520,
         "license": "apache-2.0",
-        "base_model": "Qwen/Qwen2.5-1.5B-Instruct"
+        "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+        "variant": "q8 weights, KV cache 4096 tokens (the f32 file in the same repo is 6.2 GB)",
+        "published_by": "litert-community (Google AI Edge); not gated"
       },
       "runtime": {
         "name": "LiteRT-LM",
         "maven": "com.google.ai.edge.litertlm:litertlm-android",
-        "version": "0.16.1"
+        "version": "0.16.1",
+        "accelerator": "cpu"
       },
+      "convert": {
+        "tool": "none",
+        "patches": [],
+        "note": "The bundle is published as-is by litert-community; this recipe converts nothing. A fine-tune of the same base converts with https://github.com/john-rocky/hf-to-litertlm."
+      },
+      "integrate": {
+        "guide": "android-llm-chat/INTEGRATION.md",
+        "files": [
+          "android-llm-chat/app/src/main/kotlin/io/github/johnrocky/llmchat/ChatEngine.kt",
+          "android-llm-chat/app/src/main/kotlin/io/github/johnrocky/llmchat/ModelProvisioner.kt"
+        ],
+        "test_files": [
+          "android-llm-chat/app/src/androidTest/kotlin/io/github/johnrocky/llmchat/ChatIntegrationTest.kt"
+        ],
+        "deps": [
+          "implementation(\"com.google.ai.edge.litertlm:litertlm-android:0.16.1\")",
+          "implementation(\"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0\")"
+        ],
+        "pins": {
+          "org.jetbrains.kotlinx:kotlinx-coroutines-android": "1.11.0",
+          "androidx.test:runner": "1.7.0",
+          "androidx.test.ext:junit": "1.3.0",
+          "junit:junit": "4.13.2"
+        },
+        "manifest": [
+          "<uses-permission android:name=\"android.permission.INTERNET\" /> (download on first launch only; inference is offline)",
+          "<uses-native-library android:name=\"libvndksupport.so\" android:required=\"false\" /> and <uses-native-library android:name=\"libOpenCL.so\" android:required=\"false\" /> inside <application> (GPU backend; harmless on CPU)"
+        ],
+        "gradle": [
+          "No org.jetbrains.kotlin.android plugin: AGP 9 has Kotlin built in and rejects the standalone plugin",
+          "testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\""
+        ],
+        "toolchain": "AGP 9.3.1, Gradle 9.7.0, compileSdk 36, JDK 17",
+        "min_sdk": 24,
+        "abi": "arm64-v8a",
+        "model_delivery": "downloaded at first launch into filesDir/models/<file>, sha256 verified while streaming into a .part file (ModelProvisioner). Developer shortcut: after the app is installed, adb push the file directly into /sdcard/Android/data/<applicationId>/files/ (no subdirectory: a shell-made subdirectory is not readable by the app) and the provisioner uses it in place after a size check."
+      },
+      "verify": {
+        "command": "./gradlew :app:connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true   # first run downloads the 1.6 GB model on the device (about 3 min on Wi-Fi); or, after one install, adb push <file> /sdcard/Android/data/io.github.johnrocky.llmchat/files/ first",
+        "expected": "BUILD SUCCESSFUL; run finished: 5 tests, 0 failed. logcat (tag recipe), Pixel 8a, CPU backend, LiteRT-LM 0.16.1, 2026-09-05: PROVISION via=pushed ms=9 bytes=1597931520 | RESULT check=turn load_ms=8794 chunks=7 chars=31 first_chunk_ms=909 prefill_tok_s=55.45 decode_tok_s=8.90 ttft_s=0.67 reply=\"The capital of France is Paris.\" second_turn_chars=31 | RESULT check=throughput prompt=\"Explain in five sentences why the sky is blue.\" runs=3 decode_tokens=113/113/122 decode_tok_s=10.48/10.54/10.26 decode_tok_s_median=10.48 prefill_tok_s=60.29/55.28/50.75 thermal_status=1->1 | RESULT check=cancel_collector chunks_before_cancel=10 cpu_ms_generating=2020/502ms cpu_ms_after_cancel=80/1507ms next_turn_first_chunk_ms=1578 turns=4 intro_reply=\"Hello Alice! How can I help you today?\" next_turn_reply=Alice | RESULT check=cancel_explicit chunks=6 flow_completed_ms=2219 cpu_ms_after_cancel=10/1506ms next_turn_first_chunk_ms=1099 turns=2 partial=\"1, 2, \" next_turn_head=OK. | RESULT check=release load1_ms=1381 pss_loaded_kb=1975121 pss_released_kb=91633 load2_ms=1442 reply_chars_after_reload=31 turns_after_reload=4 | RESULT check=close_during_generation chunks_at_close=6 close_ms=535 cpu_ms_after_close=30/1509ms reload_ms=1154 next_turn_head=OK. Asserted: non-blank streamed replies; no chunk after the cancel and process CPU time under 400 ms over the next 1.5 s; the turn before the cancel is still known ('Alice'); an explicit cancel() ends the flow at chunk 5-8 and the next prompt gets a fresh short answer; close() then initialize() answers again with the history kept; close() during a reply returns in under 10 s and the process is idle afterwards. Latency, tokens/s, memory and load times are logged conditions, not assertions."
+      },
+      "devices": [
+        {
+          "name": "Pixel 8a",
+          "soc": "Tensor G3",
+          "os": "Android 16, build CP1A.260505.005 (SDK 36)",
+          "date": "2026-09-05",
+          "accelerator": "cpu",
+          "runtime_version": "0.16.1",
+          "tok_per_s": 10.48,
+          "tok_per_s_runs": "10.48/10.54/10.26",
+          "decode_tokens_per_run": "113/113/122",
+          "prefill_tok_per_s": 55.4,
+          "ttft_s": 0.67,
+          "load_ms": 8794,
+          "load_ms_warm": 1442,
+          "pss_loaded_kb": 1975121,
+          "pss_released_kb": 91633,
+          "cancel_cpu_ms_per_1500ms": 80,
+          "cancel_cpu_ms_generating_per_500ms": 2020,
+          "cancel_next_turn_first_chunk_ms": 1578,
+          "close_during_generation_ms": 535,
+          "thermal_status": "1 -> 1",
+          "model_provisioned_via": "pushed",
+          "conditions": "USB power, screen on, nothing else running on the phone (checked with top), thermal status 1 before and after, MemAvailable about 4 GB; tok/s are the runtime's own BenchmarkInfo, median of 3 turns of the same prompt after a warm-up turn; load_ms is the first Engine.initialize() of the run (runtime cache from an earlier run present), load_ms_warm the reload inside the release check",
+          "source": "this recipe's verify command, run on 2026-09-05 (RESULT lines quoted in INTEGRATION.md section 6)"
+        },
+        {
+          "name": "Pixel 8a",
+          "soc": "Tensor G3",
+          "os": "Android 16, build CP1A.260505.005 (SDK 36)",
+          "date": "2026-09-05",
+          "accelerator": "gpu",
+          "runtime_version": "0.16.1",
+          "tok_per_s": 13.8,
+          "tok_per_s_runs": "13.28/13.81/13.80",
+          "decode_tokens_per_run": "30/37/39",
+          "prefill_tok_per_s": 71.5,
+          "ttft_s": 0.5,
+          "load_ms": 6691,
+          "load_ms_warm": 5483,
+          "pss_loaded_kb": 2647531,
+          "pss_released_kb": 492268,
+          "cancel_cpu_ms_per_1500ms": 60,
+          "cancel_cpu_ms_generating_per_500ms": 390,
+          "cancel_next_turn_first_chunk_ms": 929,
+          "close_during_generation_ms": 696,
+          "thermal_status": "1 -> 1",
+          "model_provisioned_via": "pushed",
+          "conditions": "USB power, screen on, nothing else running on the phone (checked with top), thermal status 1 before and after, MemAvailable about 4 GB; tok/s are the runtime's own BenchmarkInfo, median of 3 turns of the same prompt after a warm-up turn; load_ms is the first Engine.initialize() of the run (runtime cache from an earlier run present), load_ms_warm the reload inside the release check; replies were shorter on the GPU backend for the same prompts (30-39 vs 113-122 decode tokens), not investigated; the first-ever GPU load on this phone (OpenCL kernel build) took 62-67 s in two earlier runs",
+          "source": "this recipe's verify command with -Pandroid.testInstrumentationRunnerArguments.backend=gpu, run on 2026-09-05"
+        },
+        {
+          "name": "Pixel 8a",
+          "soc": "Tensor G3",
+          "os": "Android 16, build CP1A.260505.005 (SDK 36)",
+          "date": "2026-09-05",
+          "accelerator": "cpu",
+          "runtime_version": "0.17.0 (compiled with -Xskip-metadata-version-check, see regate)",
+          "tok_per_s": 10.2,
+          "tok_per_s_runs": "10.20/10.32/10.18",
+          "decode_tokens_per_run": "92/110/110",
+          "prefill_tok_per_s": 42.9,
+          "ttft_s": 0.6,
+          "load_ms": 13272,
+          "load_ms_warm": 1614,
+          "pss_loaded_kb": 1973407,
+          "pss_released_kb": 90063,
+          "cancel_cpu_ms_per_1500ms": 10,
+          "cancel_cpu_ms_generating_per_500ms": 1790,
+          "cancel_next_turn_first_chunk_ms": 2045,
+          "close_during_generation_ms": 597,
+          "thermal_status": "1 -> 1",
+          "model_provisioned_via": "cached",
+          "conditions": "USB power, screen on, nothing else running on the phone (checked with top), thermal status 1 before and after, MemAvailable about 4 GB; tok/s are the runtime's own BenchmarkInfo, median of 3 turns of the same prompt after a warm-up turn; load_ms is the first Engine.initialize() of the run (runtime cache from an earlier run present), load_ms_warm the reload inside the release check",
+          "source": "re-gate run on 2026-09-05 with -PlitertlmVersion=0.17.0 -PskipKotlinMetadataCheck=true; not the pinned configuration"
+        }
+      ],
       "unverified": [
-        "everything: the recipe directory android-llm-chat/ is not written yet"
+        "Android emulator: not run (CPU backend may work there, GPU will not)",
+        "any device other than the Pixel 8a below (Samsung Galaxy / Adreno, MediaTek, other Pixels)",
+        "Android versions other than 16",
+        "the f32 bundle in the same repo (6.2 GB); only the q8 file was used",
+        "tool calling, images, audio, thinking mode, LoRA: not touched by this recipe",
+        "conversations longer than the 4096-token KV cache of this bundle",
+        "download over a metered or interrupted connection: the sha256 check rejects a truncated file, resuming is not implemented",
+        "Galaxy S26 rows exist for the same bundle through the litert-lm CLI (apple-silicon-llm-bench), taken with a different harness, not with this test"
       ],
       "provenance": {
         "converted_by": "litert-community (Google AI Edge) published the bundle; integration and verification by john-rocky",
         "recipe_origin": "https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md",
-        "measurement_report": "https://github.com/john-rocky/apple-silicon-llm-bench/blob/main/results/android/litertlm-qwen2.5-1.5b-mac-galaxy-s26.md",
+        "measurement_report": "https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md#7-verified--unverified",
+        "commit": "PENDING: set to the commit that adds this file",
         "maintainer": "https://github.com/john-rocky/on-device-recipes/issues"
+      },
+      "regate": {
+        "litertlm_android_0_17_0": "On Google Maven since 2026-09-04 (no GitHub release on 2026-09-05). Its Kotlin metadata is 2.4.0; the Kotlin built into AGP 9.3.1 (2.2) refuses it: 'Module was compiled with an incompatible version of Kotlin. The binary version of its metadata is 2.4.0, expected version is 2.2.0'. Compiled with -Xskip-metadata-version-check it passed all five checks on the CPU backend (devices[2]). The recipe stays on 0.16.1 until a toolchain with Kotlin 2.4 support is verified.",
+        "model_delivery": "The download path ran in the first run after install (PROVISION via=download, 180871 ms for 1597931520 bytes on Wi-Fi, sha256 verified). The pushed copy is used only when it sits directly in the app's external files dir (PROVISION via=pushed); a copy under a shell-created subdirectory is unreadable to the app and the provisioner downloads instead."
       }
     },
     {

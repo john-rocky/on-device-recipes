@@ -24,11 +24,41 @@ Pending.
 
 ## Quick start
 
-Pending: Recipe 2, `android-llm-chat/INTEGRATION.md` (Gradle dependency, two Kotlin files, model download with sha256, cancel and release, verify command with expected output).
+Recipe 2 adds Qwen2.5-1.5B-Instruct as an offline chat to an app that already exists:
+[android-llm-chat/INTEGRATION.md](https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md).
+
+```kotlin
+// app/build.gradle.kts, minSdk 24
+implementation("com.google.ai.edge.litertlm:litertlm-android:0.16.1")
+implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")   // required pin
+```
+
+Copy `ChatEngine.kt` and `ModelProvisioner.kt` from the recipe, then:
+
+```kotlin
+val modelFile = ModelProvisioner.provision(context, MODEL_URL, MODEL_SHA256, MODEL_BYTES) { status -> }
+val engine = ChatEngine(modelFile.absolutePath, cacheDir = context.cacheDir.path)
+engine.initialize()                                           // seconds; Dispatchers.IO inside
+engine.send("Hello").collect { chunk -> transcript.append(chunk) }
+engine.cancel()   // Stop: ends the reply being generated; the next send() continues the chat
+engine.close()    // Release: frees the model; initialize() loads it again with the chat kept
+```
+
+The model file (1.6 GB, sha256 in the recipe) is downloaded once into the app's `filesDir`;
+`INTERNET` is needed for that download only. The verify command is
+`./gradlew :app:connectedDebugAndroidTest` after pushing the model to the device; it checks the
+stream, the cancel (process CPU time flat afterwards), and close() followed by initialize().
 
 ## Real-device measurements
 
-Pending: Pixel 8a rows from Recipe 2's verify command. Already published: Qwen2.5-1.5B-Instruct (q8) through LiteRT-LM 0.16.1 on a Mac and a Galaxy S26, in [litertlm-qwen2.5-1.5b-mac-galaxy-s26.md](https://github.com/john-rocky/apple-silicon-llm-bench/blob/main/results/android/litertlm-qwen2.5-1.5b-mac-galaxy-s26.md).
+Recipe 2's instrumented test on a Pixel 8a (Tensor G3, Android 16), LiteRT-LM 0.16.1, the q8 bundle, phone idle, 2026-09-05. Tokens/s are the runtime's own numbers, median of three turns of the same prompt.
+
+| backend | decode tokens/s | prefill tokens/s | first token | model load / reload | process memory loaded, after release |
+|---|---|---|---|---|---|
+| CPU | 10.5 | 55 | 0.67 s | 8.8 s / 1.4 s | 1,929 MB, 89 MB |
+| GPU | 13.8 (shorter replies, 30 to 39 tokens) | 72 | 0.50 s | 6.7 s / 5.5 s | 2,585 MB, 480 MB |
+
+Stop and release are measured too: after a cancel the process used 80 ms of CPU time in the next 1.5 s on CPU (2,020 ms per 0.5 s while generating) and 60 ms on GPU; `close()` freed the model in 535 ms during a reply on CPU. Full lines and conditions: [INTEGRATION.md section 7](https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md#7-verified--unverified). The same bundle through the litert-lm CLI on a Mac and a Galaxy S26, with a different harness: [litertlm-qwen2.5-1.5b-mac-galaxy-s26.md](https://github.com/john-rocky/apple-silicon-llm-bench/blob/main/results/android/litertlm-qwen2.5-1.5b-mac-galaxy-s26.md).
 
 ## When to use, when not to use, alternatives
 

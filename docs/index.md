@@ -16,7 +16,7 @@ Device-verified answers to developer questions about adding on-device AI to an e
 | Recipe | Question it answers | Runtime | Verified on | Status |
 |---|---|---|---|---|
 | [Background removal (ormbg) in an existing Android app, GPU](https://github.com/john-rocky/LiteRT-Models/blob/main/ormbg/INTEGRATION.md) (`ormbg-android-gpu`) | PyTorch model on Android without ONNX | LiteRT 2.2.0, `CompiledModel` GPU | Pixel 8a (Android 16), GPU: 246 ms per image for the model, 361 ms end to end, 246/246 ops on the GPU, 2026-09-05 | verified |
-| Offline chat with Qwen2.5-1.5B-Instruct in an existing Android app (`android-llm-chat`) | LiteRT-LM models other than Gemma | LiteRT-LM 0.16.1 (`litertlm-android`) | none yet | planned |
+| [Offline chat with Qwen2.5-1.5B-Instruct in an existing Android app](https://github.com/john-rocky/on-device-recipes/blob/main/android-llm-chat/INTEGRATION.md) (`android-llm-chat`) | LiteRT-LM models other than Gemma | LiteRT-LM 0.16.1 (`litertlm-android`) | Pixel 8a (Android 16): 10.5 tokens/s decode on CPU, 13.8 on GPU, 0.7 s to first token; Stop, Release and reload checked by the instrumented test, 2026-09-05 | verified |
 | A fine-tuned Hugging Face model in an existing iPhone app (`hf-finetune-iphone`) | fine-tuned HF model on iPhone | swift-litert-lm 0.1.1 + hf-to-litertlm | none yet | planned |
 <!-- gen:recipes-table:end -->
 

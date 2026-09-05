@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LLM Chat</string>
+    <string name="prompt_hint">Type a message</string>
+    <string name="send">Send</string>
+    <string name="stop">Stop</string>
+    <string name="release">Release model</string>
+    <string name="load">Load model</string>
+</resources>

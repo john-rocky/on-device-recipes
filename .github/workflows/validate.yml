@@ -16,5 +16,7 @@ jobs:
       - run: pip install jsonschema
       - name: recipes.json against the schema, docs consistency
         run: python tools/validate.py
+      - name: recipes that live in this repository, against the schema
+        run: python tools/validate.py --recipe android-llm-chat/recipe.json
       - name: vendored recipes against their canonical recipe.json
         run: python tools/check_drift.py
