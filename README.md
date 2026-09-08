@@ -6,6 +6,8 @@
 
 **Fastest way to try it.** Open the question that matches yours; the answer is in the first 300 words and links the recipe. To run a recipe, follow its INTEGRATION guide top to bottom and run its verify command. Pages: https://john-rocky.github.io/on-device-recipes/
 
+**Missing the recipe you need?** [Open a recipe request](https://github.com/john-rocky/on-device-recipes/issues/new?template=recipe-request.yml): the feature and the platform in one sentence. The recipe comes back on the issue, verified on a named device with a date.
+
 ## Questions
 
 - [Can I run a PyTorch model on Android without going through ONNX?](docs/pytorch-model-on-android-without-onnx.md) — yes. litert-torch, ExecuTorch and ONNX Runtime measured on one conv + transformer model, the LiteRT GPU rank-4 and fp16 rules, quick start for all three. Last verified 2026-09-05.

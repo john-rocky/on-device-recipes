@@ -1,0 +1,51 @@
+name: "Request a recipe"
+description: "Say what you want to add to your existing app. The answer page and the device-verified recipe come back on this issue."
+title: "[recipe] "
+labels: ["recipe request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One sentence is enough: the feature and the platform ("offline chat in my Android app",
+        "background removal on iPhone", "run my fine-tuned model on the phone"). The reply on this
+        issue carries the recipe (the dependency line, the file to copy, the model file with its
+        sha256, the verify command with its expected output) and the device it was verified on,
+        with the date; or the reason it cannot be done yet.
+
+        What gets a recipe: an existing iOS or Android app, an open-weight model, and a runtime
+        that runs it on a phone today. Requests are batched into verification runs on real
+        devices, so an open issue is normal, not forgotten. To have a specific model converted,
+        use the model request in hf-to-litertlm (link in the issue chooser).
+  - type: input
+    id: ask
+    attributes:
+      label: What do you want to add, and to what?
+      placeholder: "offline chat with a small LLM in my existing Android (Kotlin) app"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform (optional)
+      options:
+        - Android
+        - iOS
+        - Both
+        - Not sure
+    validations:
+      required: false
+  - type: input
+    id: model
+    attributes:
+      label: Model, if you have one in mind (optional)
+      description: A Hugging Face link, or just the task if any model that works is fine.
+      placeholder: "https://huggingface.co/<org>/<model>"
+    validations:
+      required: false
+  - type: input
+    id: device
+    attributes:
+      label: Your device (optional)
+      placeholder: "Pixel 8a / Galaxy S24 / iPhone 15"
+    validations:
+      required: false

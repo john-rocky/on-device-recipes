@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: The pages (answer first, recipe linked)
+    url: https://john-rocky.github.io/on-device-recipes/
+    about: Read the question that matches yours before opening a request; the answer may already be there.
+  - name: Convert a Hugging Face model (hf-to-litertlm)
+    url: https://github.com/john-rocky/hf-to-litertlm/issues/new?template=model-request.yml
+    about: Requests to convert a specific model go there; recipes here assume the model file already exists.
+  - name: Recipe 1 (ormbg, Android GPU) is maintained in LiteRT-Models
+    url: https://github.com/john-rocky/LiteRT-Models/issues
+    about: A problem with a recipe goes to the repository that ships its code (the "Maintained at" line of its provenance block).
+  - name: Recipe 3 (fine-tune on iPhone) is maintained in swift-litert-lm
+    url: https://github.com/john-rocky/swift-litert-lm/issues
+    about: Same rule; Recipe 2 (android-llm-chat) is maintained here.
