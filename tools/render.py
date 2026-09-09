@@ -9,6 +9,7 @@ Outputs
   the text between `<!-- gen:<key>:start -->` and `<!-- gen:<key>:end -->` in README.md, llms.txt,
   AGENTS.md, docs/*.md and skills/**/*.md: the generator owns the inside of a region, people own
   everything outside it
+  docs/llms.txt                      a copy of llms.txt, because GitHub Pages publishes docs/
   out/<id>/card-addendum.md          the line and the pull-request body for the model author's card
   out/<id>/page-block.md             the question-page block (answer, conditions, steps, limits,
                                      measurements, provenance), each part in its own marker region
@@ -726,6 +727,9 @@ def render_all(ctx: Context) -> dict[Path, str]:
     result: dict[Path, str] = {}
     for path in text_targets(ctx.root):
         result[path.relative_to(ctx.root)] = inject(ctx, path, path.read_text(encoding="utf-8"))
+    if Path("llms.txt") in result:
+        # GitHub Pages publishes docs/, so the same index has to exist there for /llms.txt to resolve.
+        result[Path("docs") / "llms.txt"] = result[Path("llms.txt")]
     for r in ctx.recipes:
         d = Path("out") / r["id"]
         result[d / "card-addendum.md"] = card_addendum(ctx, r)
@@ -773,7 +777,7 @@ def main(argv: list[str] | None = None) -> int:
         for rel, new in rendered.items():
             if rel.parts[0] == "out":
                 continue  # out/ is not tracked; the regions it mirrors are checked through the pages
-            old = (root / rel).read_text(encoding="utf-8")
+            old = (root / rel).read_text(encoding="utf-8") if (root / rel).is_file() else ""
             if old != new:
                 drift += 1
                 sys.stdout.writelines(
