@@ -45,7 +45,7 @@ Size decides more than architecture on a phone: the converter's default is int8 
 ## Quick start
 
 <!-- gen:recipe-answer:hf-finetune-iphone:start -->
-**Run a fine-tuned Hugging Face model in an existing iPhone app (convert with hf-to-litertlm, load with swift-litert-lm).** Model: [mlboydaisuke/Qwen3-0.6B-Code-Expert-LiteRT](https://huggingface.co/mlboydaisuke/Qwen3-0.6B-Code-Expert-LiteRT) `model.litertlm` (613,406,208 bytes, apache-2.0, from [Qwen/Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B)). Runtime: LiteRT-LM via swift-litert-lm (LiteRTChat) v0.15.0 (xcframeworks pinned by the Package.swift of tag 0.2.0; main has since moved to v0.19.0, and the measurements here are from v0.15.0 unless they say otherwise), gpu. Verified: Mac Studio (Apple M4 Max, 128 GB), macOS 27.0 (26A5416b), 2026-09-05: GPU: 142.7 tokens/s decode, 469.2 tokens/s prefill, 2.2 s to the first answer, 1,411 MB footprint; CPU: 33.3 tokens/s decode, 95.2 tokens/s prefill, 11.4 s to the first answer, 1,107 MB footprint. Status: verified. Guide: https://github.com/john-rocky/swift-litert-lm/blob/main/docs/recipe-hf-finetune-to-iphone.md; machine-readable: https://raw.githubusercontent.com/john-rocky/swift-litert-lm/main/docs/recipe.json.
+**Run a fine-tuned Hugging Face model in an existing iPhone app (convert with hf-to-litertlm, load with swift-litert-lm).** Model: [mlboydaisuke/Qwen3-0.6B-Code-Expert-LiteRT](https://huggingface.co/mlboydaisuke/Qwen3-0.6B-Code-Expert-LiteRT) `model.litertlm` (613,406,208 bytes, apache-2.0, from [Qwen/Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B)). Runtime: LiteRT-LM via swift-litert-lm (LiteRTChat) v0.15.0 (xcframeworks pinned by the Package.swift of tag 0.2.0; main was on v0.19.1 on 2026-11-11, and the measurements here are from v0.15.0 unless they say otherwise), gpu. Verified: Mac Studio (Apple M4 Max, 128 GB), macOS 27.0 (26A5416b), 2026-09-05: GPU: 142.7 tokens/s decode, 469.2 tokens/s prefill, 2.2 s to the first answer, 1,411 MB footprint; CPU: 33.3 tokens/s decode, 95.2 tokens/s prefill, 11.4 s to the first answer, 1,107 MB footprint. Status: verified. Guide: https://github.com/john-rocky/swift-litert-lm/blob/main/docs/recipe-hf-finetune-to-iphone.md; machine-readable: https://raw.githubusercontent.com/john-rocky/swift-litert-lm/main/docs/recipe.json.
 <!-- gen:recipe-answer:hf-finetune-iphone:end -->
 
 **Convert** (once, on a Mac or Linux box):
@@ -96,7 +96,7 @@ The package lines, the model file, the stop and release behaviour, the second-tu
 | variant | int8 weights (converter default), context 4096 tokens, thought channel <think>/</think>, stop tokens 151645 and 151643 |
 | published by | mlboydaisuke (own conversion of the fine-tune above); not gated |
 | runtime | LiteRT-LM via swift-litert-lm (LiteRTChat) |
-| runtime version | v0.15.0 (xcframeworks pinned by the Package.swift of tag 0.2.0; main has since moved to v0.19.0, and the measurements here are from v0.15.0 unless they say otherwise) |
+| runtime version | v0.15.0 (xcframeworks pinned by the Package.swift of tag 0.2.0; main was on v0.19.1 on 2026-11-11, and the measurements here are from v0.15.0 unless they say otherwise) |
 | Swift package | <https://github.com/john-rocky/swift-litert-lm> |
 | Swift package tag | 0.2.0 (09f04f1), tagged 2026-09-05. Tag 0.1.1 and main before 09f04f1 do not compile for iOS with Xcode 26.1.1 or Xcode 27.0 beta 5; the Easy-mode sources used here are unchanged since e82e3b1 |
 | accelerator | gpu |
