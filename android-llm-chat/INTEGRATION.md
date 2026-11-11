@@ -58,7 +58,7 @@ plain Activity drives them (Send, Stop, Release model); it is a reference, not a
 | size | 1,597,931,520 bytes |
 | license | Apache-2.0 (the card's license field) |
 
-The URL names a Hub revision because the file at `main` changed on 2026-10-11 (its metadata was updated for LiteRT-LM 0.18.0, weights unchanged), so it no longer has the sha256 above. This recipe was measured on 0.16.1 with the file at this revision.
+The URL names a Hub revision because the file at `main` changed on 2026-10-11 (its metadata was updated for LiteRT-LM 0.18.0, weights unchanged: [Hub commit](https://huggingface.co/litert-community/Qwen2.5-1.5B-Instruct/commit/5e6e7a58d03777898b31330a15d2e0a5a9107de3)), so it no longer has the sha256 above. This recipe was measured on 0.16.1 with the file at this revision.
 
 One delivery pattern: the app owns `filesDir/models/<file>` and fills it by download on first
 launch. `ModelProvisioner.provision(context, url, sha256, bytes)` streams the download into a

@@ -1,6 +1,6 @@
 # On-device recipes
 
-> Device-verified recipes for adding on-device AI to an existing iOS or Android app. Each page answers one developer question in its first 300 words, then leads to a recipe with the dependency line, the file to copy, the model file with its sha256, a verify command with its expected output, and the devices it was verified on with dates.
+> Device-verified recipes for adding on-device AI to an existing iOS or Android app. Each page answers one developer question in its first 300 words, then leads to a recipe with the dependency lines, any files to copy, the model file with its sha256, a verify command with its expected output, and the devices it was verified on with dates.
 
 Numbers are measurements on named devices with dates; there are no estimates. Each recipe's source of truth is the INTEGRATION guide in the repository that ships the code; this site mirrors it and fails CI on drift. Maintainer handle: john-rocky. Last verified 2026-09-05.
 

@@ -8,7 +8,7 @@ Convert the fine-tune to one `.litertlm` file with [hf-to-litertlm](https://gith
 
 Recipe 3 does this for one representative fine-tune, [suayptalha/Qwen3-0.6B-Code-Expert](https://huggingface.co/suayptalha/Qwen3-0.6B-Code-Expert) (Apache-2.0, a full fine-tune of Qwen3-0.6B): converted in 217 s, gate 7 of 8, and answered through `LiteRTChat` on a Mac Studio (M4 Max) at 142.7 tokens/s on the GPU. The converted bundle is published as [mlboydaisuke/Qwen3-0.6B-Code-Expert-LiteRT](https://huggingface.co/mlboydaisuke/Qwen3-0.6B-Code-Expert-LiteRT), so the verify command below needs no conversion. **No iPhone has run it yet**: the iPhone 17 Pro row is added when the device is available, and the iOS Simulator was not run either (the runtime xcframework ships an `ios-arm64-simulator` slice; nothing was tried on it). macOS is a supported platform of the same package, so the Mac rows are the same Swift call the iPhone app makes.
 
-Two limits, up front: a second message on the same `LiteRTChat` fails for Qwen3-template bundles on the pinned runtime (upstream issue [google-ai-edge/LiteRT-LM#3443](https://github.com/google-ai-edge/LiteRT-LM/issues/3443); the recipe uses one `LiteRTChat` per turn), and tag 0.1.1 of the package does not compile for iOS with Xcode 26.1.1 or 27.0 beta 5, so use 0.2.0 or later.
+Two limits, up front: a second message on the same `LiteRTChat` fails for Qwen3-template bundles on the pinned runtime (upstream issue [google-ai-edge/LiteRT-LM#3443](https://github.com/google-ai-edge/LiteRT-LM/issues/3443), closed on 2026-11-07, with the general case in [#3166](https://github.com/google-ai-edge/LiteRT-LM/issues/3166); the recipe uses one `LiteRTChat` per turn), and tag 0.1.1 of the package does not compile for iOS with Xcode 26.1.1 or 27.0 beta 5, so use 0.2.0 or later.
 
 ## Supported models
 
@@ -168,7 +168,7 @@ Not the better choice when:
 
 - **The converter refuses the model.** Mixture-of-experts, repository-local architectures, pre-quantized weights and gated repositories are refused at the entry gate. llama.cpp (GGUF) and MLX cover more architectures on Apple silicon; the choice between them is not measured here.
 - **You already have GGUF or MLX weights.** There is no path from those formats to `.litertlm`; the model stays on llama.cpp or MLX.
-- **The app needs many turns on a Qwen3-template model today.** The second turn on one `LiteRTChat` fails on the pinned runtime (#3443); the recipe's workaround is one `LiteRTChat` per turn with the history in the prompt. Fine-tunes of non-thinking bases (Qwen2.5, SmolLM2, OLMo-2) do not carry that template shape; not measured in Recipe 3.
+- **The app needs many turns on a Qwen3-template model today.** The second turn on one `LiteRTChat` fails on the pinned runtime (#3443, closed; open report #3166); the recipe's workaround is one `LiteRTChat` per turn with the history in the prompt. Fine-tunes of non-thinking bases (Qwen2.5, SmolLM2, OLMo-2) do not carry that template shape; not measured in Recipe 3.
 - **You do not need custom weights.** On iOS 26 and later, Apple's Foundation Models framework runs the system model with nothing to convert or download; swift-litert-lm carries a Foundation Models-compatible adapter for the case where you do (not exercised by Recipe 3).
 - **The model is 3B parameters or more.** The converter splits the embedding out to stay under the iOS mmap limit; that path is not exercised here, and no phone number exists for it.
 

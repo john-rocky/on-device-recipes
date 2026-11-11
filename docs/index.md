@@ -1,6 +1,6 @@
 # On-device recipes
 
-Device-verified answers to developer questions about adding on-device AI to an existing iOS or Android app. Each page answers one question in its first 300 words, then leads to a recipe: the dependency line, the one file to copy, the model file with its sha256, a verify command with its expected output, and the devices it was verified on, with dates.
+Device-verified answers to developer questions about adding on-device AI to an existing iOS or Android app. Each page answers one question in its first 300 words, then leads to a recipe: the dependency lines, any files to copy, the model file with its sha256, a verify command with its expected output, and the devices it was verified on, with dates.
 
 **Last verified: 2026-09-05.** Source and issues: https://github.com/john-rocky/on-device-recipes
 

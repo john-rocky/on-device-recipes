@@ -1,6 +1,6 @@
 # On-device recipes
 
-Step-by-step guides for adding one AI feature to an iOS or Android app you already have, running on the device with LiteRT or LiteRT-LM, Google's on-device runtimes. There are three so far: background removal on the Android GPU, an offline chat on Android, and a fine-tuned Hugging Face model for iPhone, which has only run on a Mac so far.
+Step-by-step guides for adding one AI feature to an iOS or Android app you already have, running on the device with LiteRT or LiteRT-LM, Google's on-device runtimes. There are three so far: background removal on the Android GPU, an offline chat on Android, and a fine-tuned Hugging Face model for iPhone, which has run on a Mac but not yet on an iPhone.
 
 Each recipe lists what to add and which model file to download, and gives a command that runs the model to check it.
 
@@ -16,7 +16,7 @@ Each recipe lists what to add and which model file to download, and gives a comm
 
 [The full table](docs/index.md) has the timings on each device. If the recipe you need is missing, [ask for one](https://github.com/john-rocky/on-device-recipes/issues/new?template=recipe-request.yml).
 
-## Short guides
+## Guides
 
 - [A PyTorch model on Android without ONNX](docs/pytorch-model-on-android-without-onnx.md), with litert-torch
 - [LiteRT-LM with models other than Gemma](docs/litert-lm-models-other-than-gemma.md)
