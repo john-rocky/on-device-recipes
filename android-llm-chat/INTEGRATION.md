@@ -53,10 +53,12 @@ plain Activity drives them (Send, Stop, Release model); it is a reference, not a
 | | |
 |---|---|
 | file | `Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm` |
-| URL | `https://huggingface.co/litert-community/Qwen2.5-1.5B-Instruct/resolve/main/Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm` |
+| URL | `https://huggingface.co/litert-community/Qwen2.5-1.5B-Instruct/resolve/19edb84c69a0212f29a6ef17ba0d6f278b6a1614/Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm` |
 | sha256 | `faa60663b333290c1496c499828b21d3e3254a788cacd8cce917ce0f761a2dc9` |
 | size | 1,597,931,520 bytes |
 | license | Apache-2.0 (the card's license field) |
+
+The URL names a Hub revision because the file at `main` changed on 2026-10-11 (its metadata was updated for LiteRT-LM 0.18.0, weights unchanged), so it no longer has the sha256 above. This recipe was measured on 0.16.1 with the file at this revision.
 
 One delivery pattern: the app owns `filesDir/models/<file>` and fills it by download on first
 launch. `ModelProvisioner.provision(context, url, sha256, bytes)` streams the download into a

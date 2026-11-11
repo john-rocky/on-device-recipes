@@ -20,7 +20,7 @@ Outputs
     python tools/render.py --fetch     # refresh the litert-community cache from the API, then render
     python tools/render.py --refresh   # re-vendor every entry from its `source` URL, then render
 
-Keys: recipes-table, ungated-litertlm-list, llms-recipes, and per recipe recipe-answer:<id>,
+Keys: recipes-table, recipes-summary, ungated-litertlm-list, llms-recipes, and per recipe recipe-answer:<id>,
 recipe-conditions:<id>, recipe-steps:<id>, recipe-limits:<id>, recipe-measurements:<id>,
 provenance:<id>. An unknown key or id is an error, never a silent skip.
 
@@ -97,6 +97,7 @@ CONDITION_ROWS = [
     ("model", "file", "model file"),
     ("model", "url", "download URL"),
     ("model", "sha256", "sha256"),
+    ("model", "sha256_note", "sha256 note"),
     ("model", "bytes", "size, bytes"),
     ("model", "license", "license"),
     ("model", "base_model", "base model"),
@@ -299,6 +300,23 @@ def tpl_recipes_table(ctx: Context, where: Path) -> str:
         name = f"[{title}]({guide}) (`{r['id']}`)" if guide else f"{title} (`{r['id']}`)"
         verified = device_summary(r, pinned_rows(r)) or "none yet"
         lines.append(f"| {name} | {page_link(ctx, r, where)} | {runtime_text(r)} | {verified} | {status_word(r['status'])} |")
+    return "\n".join(lines)
+
+
+def tpl_recipes_summary(ctx: Context, where: Path) -> str:
+    """The short table on the README: the runtime and where each recipe ran, without the measurements."""
+    lines = ["| Recipe | Runtime | Ran on |", "|---|---|---|"]
+    for r in ctx.recipes:
+        guide = r.get("provenance", {}).get("recipe_origin")
+        title = r.get("title") or r.get("task", r["id"])
+        name = f"[{title}]({guide})" if guide else title
+        rt = r.get("runtime", {})
+        rt_name = re.sub(r" via .*| \(.*?\)", "", rt.get("name", ""))
+        runtime = f"{rt_name} {str(rt.get('version', '')).split(' ')[0]}".strip()
+        if rt.get("accelerator"):
+            runtime += f", {str(rt['accelerator']).upper()}"
+        places = list(dict.fromkeys(f"{row.get('name', '?')}, {row.get('date', '')}".rstrip(", ") for row in pinned_rows(r)))
+        lines.append(f"| {name} | {runtime} | {'; '.join(places) or 'not run yet'} |")
     return "\n".join(lines)
 
 
@@ -521,6 +539,7 @@ def tpl_provenance(ctx: Context, where: Path, recipe: dict) -> str:
 
 TEMPLATES = {
     "recipes-table": tpl_recipes_table,
+    "recipes-summary": tpl_recipes_summary,
     "ungated-litertlm-list": tpl_ungated_list,
     "llms-recipes": tpl_llms_recipes,
 }

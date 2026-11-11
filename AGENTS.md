@@ -8,7 +8,7 @@ Read this first if you are a coding agent asked to add on-device AI to an existi
 4. `llms.txt` lists the same pages and files with one-line descriptions.
 5. `measurements/` holds the raw records behind numbers quoted on the pages; `docs/provenance.md` defines the attribution block. `skills/*/SKILL.md` are step-by-step procedures for applying a recipe to a user's project; they resolve versions from `recipe.json`, never from memory.
 6. Numbers here are measurements on named devices with dates. Do not extrapolate them to other devices, and do not quote a number that has no device and date next to it.
-7. Model files are not in this repository. Download from the Hugging Face repo in `model.hf_repo` and check `model.sha256` before use.
+7. Model files are not in this repository. If the entry has `model.url`, download that (it can name a Hub revision). Otherwise download `model.file` from the Hugging Face repo in `model.hf_repo`. Check `model.sha256` before use. Where `model.sha256_note` is present, it explains a different hash at the URL.
 8. To add or update a recipe: write `recipe.json` next to the code, vendor it with `python tools/vendor.py <id> <path or raw URL> --status verified`, then run `python tools/validate.py`, `python tools/check_drift.py` and `python tools/render.py`.
 9. Do not edit text between `<!-- gen:...:start -->` and `<!-- gen:...:end -->` markers; `tools/render.py` regenerates it from `recipes.json` and `data/litert-community-litertlm.json`, and CI fails when it drifts. `out/<id>/` (not committed) holds the same facts as a card addendum, a page block and the LiteRT-side lines.
 10. Maintainer handle: john-rocky (GitHub), mlboydaisuke (Hugging Face). Issues: https://github.com/john-rocky/on-device-recipes/issues
