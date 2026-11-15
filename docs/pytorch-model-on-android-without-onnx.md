@@ -194,7 +194,7 @@ TensorFlow Lite's own converter (`tf.lite.TFLiteConverter`) still exists for Ten
 - ExecuTorch Android: https://docs.pytorch.org/executorch/stable/using-executorch-android.html
 - ONNX Runtime Android: https://onnxruntime.ai/docs/get-started/with-java.html
 - Vision models converted with litert-torch for `CompiledModel` GPU, with a conversion guide that lists the GPU op rules and the attention rewrites: https://github.com/john-rocky/LiteRT-Models
-<!-- TODO(lane B): add the LiteRT vs TensorFlow Lite article (B1) here once it is published. -->
+<!-- TODO: add the LiteRT vs TensorFlow Lite article here once it is published. -->
 
 ## Provenance
 
